@@ -10,5 +10,7 @@ public interface ICuentaService {
 		public List<Cuenta> findbycliente(Long id);
 		public List<Cuenta> finall();
 		public Cuenta findone(Long id);
-
+		public boolean validarcontra(Cuenta cuenta);
+		public boolean validarmax(Cuenta cuenta);
+		public void actualizarintentos(Cuenta cuenta);
 }

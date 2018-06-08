@@ -9,4 +9,5 @@ public interface IMovimientoService {
 	public void save(Movimiento movimiento);
 	public List<Movimiento> findbycuenta(Long id);
 	public List<Movimiento> findall();
+	public void actualizarcta(Movimiento mov);
 }

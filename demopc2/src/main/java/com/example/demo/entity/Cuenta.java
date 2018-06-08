@@ -38,6 +38,30 @@ public class Cuenta implements Serializable{
     
     @OneToMany(mappedBy="cuenta",fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true)
     public List<Movimiento> movimientos;
+    
+    @NotNull
+    private int clave;
+    
+	@NotNull
+    private int maxintentos;
+
+    
+    public int getMaxintentos() {
+		return maxintentos;
+	}
+
+	public void setMaxintentos(int maxintentos) {
+		this.maxintentos = maxintentos;
+	}
+
+
+	public int getClave() {
+		return clave;
+	}
+
+	public void setClave(int clave) {
+		this.clave = clave;
+	}
 
 	public String getBanco() {
 		return banco;
@@ -51,6 +75,7 @@ public class Cuenta implements Serializable{
 	
 	public Cuenta() {
 		movimientos=new ArrayList<>();
+		maxintentos=0;
 	}
     
 	public Long getId() {

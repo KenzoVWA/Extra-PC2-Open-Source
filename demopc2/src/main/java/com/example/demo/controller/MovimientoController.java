@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +53,31 @@ public class MovimientoController {
 			model.addAttribute("titulo","crear");
 			return "form3";
 		}
-		
+				
+		if(servicio2.validarcontra(mov.getCuenta())) {
+			
 		servicio.save(mov);
-		
+		servicio2.actualizarintentos(mov.getCuenta());
 		flash.addFlashAttribute("success","note que si el retiro era mayor a su saldo, no se podra realizar el movimiento.");
-		
 		return "redirect:/listar4";
+		
+		}
+		else {
+			
+			if(servicio2.validarmax(mov.getCuenta())) {
+				
+					flash.addFlashAttribute("error","mal contrasena");
+					model.addAttribute("titulo","intentar de nuevo");
+					return "form3";
+					
+			}else {
+				
+				flash.addFlashAttribute("error","sobrepaso el limite de intentos, cuenta bloqueada");
+				model.addAttribute("titulo","listar");
+				return "redirect:/listar2";
+			}
+		}	
+
 	}
 	
 	@RequestMapping(value="/listar4/{id}", method=RequestMethod.GET)

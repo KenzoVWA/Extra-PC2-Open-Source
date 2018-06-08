@@ -43,5 +43,47 @@ public class CuentaService implements ICuentaService {
 		return dao.findById(id).orElse(null);
 	}
 
+	@Override
+	public boolean validarcontra(Cuenta cuenta) {
+		// TODO Auto-generated method stub
+		Cuenta cuentaaux=  dao.findById(cuenta.getId()).orElse(null);
+		
+		if(cuentaaux.getClave()==cuenta.getClave()) {
+			return true;
+		}else {
+			return false;
+		}
+		
+
+	}
+
+	@Override
+	public boolean validarmax(Cuenta cuenta) {
+		
+		// TODO Auto-generated method stub
+		if(cuenta.getMaxintentos()+1<3) {
+		cuenta.setMaxintentos(cuenta.getMaxintentos()+1);
+		cuenta.setClave(findone(cuenta.getId()).getClave());
+		dao.save(cuenta);
+		return true;
+		}else {
+			
+		if(cuenta.getMaxintentos()<3)
+		cuenta.setMaxintentos(cuenta.getMaxintentos()+1);
+		
+		cuenta.setClave(findone(cuenta.getId()).getClave());
+		dao.save(cuenta);
+		return false;
+		}
+		
+	}
+
+	@Override
+	public void actualizarintentos(Cuenta cuenta) {
+		// TODO Auto-generated method stub
+		cuenta.setMaxintentos(0);
+		dao.save(cuenta);
+	}
+
 
 }

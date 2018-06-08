@@ -27,20 +27,8 @@ public class MovimientoService implements IMovimientoService {
 
 		
 		if(movimiento.getMonto()<movimiento.getCuenta().getSaldobase()) {
-			int numero=movimiento.getMonto();
-			Long saldo=movimiento.getCuenta().getSaldobase();
-			Long recalculo;
-			if(movimiento.getTipo().equalsIgnoreCase("retiro")) {
-				recalculo=saldo-numero;
-				Cuenta cuenta=movimiento.getCuenta();
-				cuenta.setSaldobase(recalculo);
-				dao2.save(cuenta);
-			}else if(movimiento.getTipo().equalsIgnoreCase("deposito")){
-				recalculo=saldo+numero;
-				Cuenta cuenta=movimiento.getCuenta();
-				cuenta.setSaldobase(recalculo);
-				dao2.save(cuenta);
-			}
+
+		actualizarcta(movimiento);
 		
 		dao.save(movimiento);
 		
@@ -60,6 +48,25 @@ public class MovimientoService implements IMovimientoService {
 	public List<Movimiento> findall() {
 		// TODO Auto-generated method stub
 		return dao.findAll();
+	}
+
+	@Override
+	public void actualizarcta(Movimiento movimiento) {
+		// TODO Auto-generated method stub
+		int numero=movimiento.getMonto();
+		Long saldo=movimiento.getCuenta().getSaldobase();
+		Long recalculo;
+		if(movimiento.getTipo().equalsIgnoreCase("retiro")) {
+			recalculo=saldo-numero;
+			Cuenta cuenta=movimiento.getCuenta();
+			cuenta.setSaldobase(recalculo);
+			dao2.save(cuenta);
+		}else if(movimiento.getTipo().equalsIgnoreCase("deposito")){
+			recalculo=saldo+numero;
+			Cuenta cuenta=movimiento.getCuenta();
+			cuenta.setSaldobase(recalculo);
+			dao2.save(cuenta);
+		}
 	}
 
 }
