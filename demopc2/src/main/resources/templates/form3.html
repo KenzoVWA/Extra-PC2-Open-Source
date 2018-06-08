@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<body>
+
+	
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<div th:object="${cliente}" th:remove="tag">
+
+				</div>
+
+				<form th:action="@{/form3}" th:object="${movimiento}" method="post"
+					enctype="multipart/form-data">
+					
+				
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">monto</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{monto}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> 
+														</div>
+					</div>
+					
+					<div class="form-group row">
+					<label for="tipo" class="col-sm-2 col-form-label">Tipo de movimiento</label>
+					<div class="col-sm-6">
+					<select class="form-control" id="tipo" th:field="*{tipo}" required>
+					  <option th:text="retiro" value="retiro">
+					  </option>
+					  <option th:text="deposito" value="deposito">
+					  </option>
+					</select>
+					</div>
+					</div>
+					
+					<div class="form-group row">
+					<label for="dni" class="col-sm-2 col-form-label">id de cuenta</label>
+					
+						<div class="col-sm-6">
+							<input type="text" th:field="*{cuenta.id}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+						</div>
+					</div>
+					
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titulo}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
