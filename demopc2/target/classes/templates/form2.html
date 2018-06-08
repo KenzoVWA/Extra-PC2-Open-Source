@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<body>
+
+	
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				
+				<form th:action="@{/form2}" th:object="${cuenta}" method="post"
+					enctype="multipart/form-data">
+					
+				
+					<div class="form-group row">
+						<label for="nrocta" class="col-sm-2 col-form-label">nrocta</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{nrocta}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> 
+														</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="saldobase" class="col-sm-2 col-form-label">saldobase</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{saldobase}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> 
+						</div>
+					</div>
+					
+					<div class="form-group row">
+					<label for="banco" class="col-sm-2 col-form-label">banco</label>
+					
+						<div class="col-sm-6">
+							<input type="text" th:field="*{banco}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+						</div>
+					</div>
+
+					<div class="form-group row">
+					<label for="clienteid" class="col-sm-2 col-form-label">cliente id</label>
+					
+						<div class="col-sm-6">
+							<input type="text" th:field="*{cliente.id}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titulo}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
