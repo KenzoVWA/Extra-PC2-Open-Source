@@ -53,14 +53,22 @@ public class MovimientoController {
 			model.addAttribute("titulo","crear");
 			return "form3";
 		}
-				
-		if(servicio2.validarcontra(mov.getCuenta())) {
-			
-		servicio.save(mov);
-		servicio2.actualizarintentos(mov.getCuenta());
-		flash.addFlashAttribute("success","note que si el retiro era mayor a su saldo, no se podra realizar el movimiento.");
-		return "redirect:/listar4";
+					
+	
 		
+		if(servicio2.validarcontra(mov.getCuenta())) {
+		
+			if(servicio.validardiarios(mov)<3) {
+			servicio.save(mov);
+			servicio2.actualizarintentos(mov.getCuenta());
+			flash.addFlashAttribute("success","note que si el retiro era mayor a su saldo, no se podra realizar el movimiento.");
+			return "redirect:/listar4";
+			}else {
+			servicio2.actualizarintentos(mov.getCuenta());	
+			flash.addFlashAttribute("success","ha exedido el maximo de movimientos diarios");
+			return "redirect:/listar2";	
+			}
+			
 		}
 		else {
 			
@@ -76,6 +84,7 @@ public class MovimientoController {
 				model.addAttribute("titulo","listar");
 				return "redirect:/listar2";
 			}
+			
 		}	
 
 	}

@@ -10,4 +10,5 @@ public interface IMovimientoService {
 	public List<Movimiento> findbycuenta(Long id);
 	public List<Movimiento> findall();
 	public void actualizarcta(Movimiento mov);
+	public int validardiarios(Movimiento mov);
 }

@@ -69,4 +69,24 @@ public class MovimientoService implements IMovimientoService {
 		}
 	}
 
+	
+	@Override
+	public int validardiarios(Movimiento mov) {
+		// TODO Auto-generated method stub
+		
+		int nro_movs_x_cta=dao.findporcuenta(mov.getCuenta().getId(), mov.getCreateAt()).size();
+		int contador=0;
+		
+		for(int i=0;i<nro_movs_x_cta;i++) {
+			if(!mov.getCreateAt().before(dao.findporcuenta(mov.getCuenta().getId(), mov.getCreateAt()).get(i).getCreateAt())
+					&&
+			!mov.getCreateAt().after(dao.findporcuenta(mov.getCuenta().getId(), mov.getCreateAt()).get(i).getCreateAt())	
+					) {
+				contador++;
+			}
+		}
+		
+		return contador;
+	}
+
 }
